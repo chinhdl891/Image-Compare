@@ -1,6 +1,3 @@
 jdk:
   - openjdk11
-install:
-  - ./gradlew clean
-before_cache:
-  - ./gradlew build
+
