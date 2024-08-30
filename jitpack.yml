@@ -1,0 +1,6 @@
+jdk:
+  - openjdk22
+install:
+  - ./gradlew clean
+before_cache:
+  - ./gradlew build
