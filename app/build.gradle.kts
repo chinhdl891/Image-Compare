@@ -46,6 +46,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-//    implementation(project(":mylibrary"))
-    implementation("com.github.chinhdl891:ImageSildeCompare:v1.0.2")
+    implementation(project(":mylibrary"))
+//    implementation("com.github.chinhdl891:ImageSildeCompare:v1.0.2")
 }
