@@ -43,6 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:src="@drawable/ic_slider_arrow_demo"
         android:id="@+id/slider_image"
         android:layout_width="64dp"
         android:layout_height="64dp"
@@ -75,6 +76,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.70" />
+        app:layout_constraintGuide_percent="0.50" />
 
 </merge>

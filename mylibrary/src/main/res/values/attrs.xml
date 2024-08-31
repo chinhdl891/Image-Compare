@@ -4,5 +4,6 @@
         <attr name="background_image" format="reference" />
         <attr name="foreground_image" format="reference" />
         <attr name="slider_icon" format="reference" />
+        <attr name="slider_image_position_percent" format="float" />
     </declare-styleable>
 </resources>

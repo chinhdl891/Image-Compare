@@ -43,7 +43,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.chinhdl891"
             artifactId = "ImageSildeCompare"
-            version = "1.0.0"
+            version = "1.0.2"
 
             afterEvaluate {
                 from(components["release"])
@@ -84,5 +84,7 @@ dependencies {
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
+    implementation(libs.glide)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }
