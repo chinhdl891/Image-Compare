@@ -83,13 +83,15 @@ class ImageCompareSlider @JvmOverloads constructor(
     }
 
 
-    fun setUpSlideCompare(backgroundData: Any) {
+    fun setUpSlideCompare(backgroundData: Bitmap) {
 
-        val backgroundBitmap = backgroundData as Bitmap
-        val resizedBackgroundBitmap = resizeBitmapToFitScreenWidth(backgroundBitmap)
+        val resizedBackgroundBitmap = resizeBitmapToFitScreenWidth(backgroundData)
         binding.backgroundImage.setImageBitmap(resizedBackgroundBitmap)
 
-        val foregroundBitmap = createTransparentBitmap(backgroundBitmap.width, backgroundBitmap.height)
+        val foregroundBitmap = createTransparentBitmap(
+            backgroundData.width,
+            backgroundData.height
+        )
         val resizedForegroundBitmap = resizeBitmapToFitScreenWidth(foregroundBitmap)
         binding.foregroundImage.setImageBitmap(resizedForegroundBitmap)
 

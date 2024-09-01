@@ -23,6 +23,6 @@ dependencyResolutionManagement {
 }
 
 
-rootProject.name = "My Application"
+rootProject.name = "Image Compare"
 include(":app")
 include(":mylibrary")
