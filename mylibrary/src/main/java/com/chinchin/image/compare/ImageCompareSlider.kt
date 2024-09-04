@@ -14,6 +14,8 @@ import android.widget.SeekBar
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.chinchin.image.compare.databinding.ImageCompareSliderBinding
 
 
@@ -76,6 +78,9 @@ class ImageCompareSlider @JvmOverloads constructor(
                 binding.sbImageSeek.max = binding.backgroundImage.width
                 heightView = binding.backgroundImage.height
                 binding.sliderBar.layoutParams.height = binding.backgroundImage.height
+                binding.target.layoutParams.height = binding.backgroundImage.height
+                binding.target.layoutParams.width = binding.backgroundImage.width
+                binding.sbImageSeek.progress = binding.backgroundImage.width
                 binding.backgroundImage.viewTreeObserver.removeOnGlobalLayoutListener(this)
             }
 
@@ -115,18 +120,28 @@ class ImageCompareSlider @JvmOverloads constructor(
 
 
     fun setForegroundImage( foregroundData: Any) {
-        loadIntoImageView(foregroundData, binding.foregroundImage)
+//        loadIntoImageView(foregroundData, binding.foregroundImage)
+        Glide.with(context).asBitmap().load(foregroundData).into(object : CustomTarget<Bitmap>(){
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+              binding.foregroundImage.setImageBitmap(resizeBitmapToFitScreenWidth(resource))
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+
+            }
+
+        } )
     }
 
 
     private fun loadIntoImageView(data: Any, imageView: ImageView) {
-        when (data) {
-            is Bitmap -> Glide.with(context).load(data).into(imageView)
-            is Drawable -> Glide.with(context).load(data).into(imageView)
-            is String -> Glide.with(context).load(data).into(imageView)
-            is Int -> Glide.with(context).load(data).into(imageView)
-            else -> Log.e("ImageCompareSlider", "Unsupported data type")
-        }
+//        when (data) {
+//            is Bitmap -> Glide.with(context).load(data).into(imageView)
+//            is Drawable -> Glide.with(context).load(data).into(imageView)
+//            is String -> Glide.with(context).load(data).into(imageView)
+//            is Int -> Glide.with(context).load(data).into(imageView)
+//            else -> Log.e("ImageCompareSlider", "Unsupported data type")
+//        }
     }
 
 

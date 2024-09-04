@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val imageCompareSlider = findViewById<ImageCompareSlider>(R.id.imv_compare)
 
         ContextCompat.getDrawable(this, R.drawable.image_test_1)?.let { res->
-            Util.compressBitmapFromDrawable(this, res, 70)
+            Util.compressBitmapFromDrawable(this, res, 10)
                 ?.let { bitmap -> imageCompareSlider.setUpSlideCompare(bitmap) }
         }
 
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         Handler(mainLooper).postDelayed({
           runOnUiThread {
               Toast.makeText(this, "Show", Toast.LENGTH_SHORT).show()
-              imageCompareSlider.setForegroundImage(R.drawable.image_test_1)
+              imageCompareSlider.setForegroundImage("https://pub-3626123a908346a7a8be8d9295f44e26.r2.dev/generations/224e86ca-203f-482d-b7f5-03408bf6d4f6_out.png")
           }
         }, 5000)
 

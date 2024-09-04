@@ -4,6 +4,9 @@ plugins {
     id("maven-publish")
 }
 
+
+
+
 android {
     namespace = "com.chinchin.image.compare"
     compileSdk = 34
@@ -14,6 +17,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
+
+
 
     buildTypes {
         release {
