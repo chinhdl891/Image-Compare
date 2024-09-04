@@ -115,6 +115,7 @@ class ImageCompareSlider @JvmOverloads constructor(
 
 
     fun zoomForeImage(scaleFactor: Float = 1.25f) {
+        setHiddenBackGround()
         binding.foregroundImage.scaleX = scaleFactor
         binding.foregroundImage.scaleY = scaleFactor
         currentScale = scaleFactor
@@ -122,6 +123,7 @@ class ImageCompareSlider @JvmOverloads constructor(
     }
 
     fun originalForeImage() {
+        setHiddenBackGround()
         binding.foregroundImage.scaleX = 1f
         binding.foregroundImage.scaleY = 1f
         currentScale = 1f
