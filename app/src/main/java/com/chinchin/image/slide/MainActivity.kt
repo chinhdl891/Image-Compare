@@ -1,8 +1,6 @@
 package com.chinchin.image.slide
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
@@ -24,6 +22,16 @@ class MainActivity : AppCompatActivity() {
                 ?.let { bitmap -> imageCompareSlider.setUpSlideCompare(bitmap) }
         }
 
+
+        findViewById<Button>(R.id.tv_zoom_in).setOnClickListener {
+            imageCompareSlider.zoomForeImage(1.5f)
+        }
+
+
+
+        findViewById<Button>(R.id.tv_original).setOnClickListener {
+            imageCompareSlider.originalForeImage()
+        }
 
         Handler(mainLooper).postDelayed({
           runOnUiThread {

@@ -8,14 +8,14 @@
     tools:context=".MainActivity">
 
     <com.chinchin.image.compare.ImageCompareSlider
-        android:layout_width="match_parent"
         android:id="@+id/imv_compare"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:slider_icon="@drawable/ic_slider_arrow"
-        android:layout_margin="16dp"/>
+        app:slider_icon="@drawable/ic_slider_arrow" />
 
     <Button
         android:id="@+id/tv_before"
@@ -34,5 +34,26 @@
         android:text=" After "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/tv_zoom_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:text=" Zoom In "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_after" />
+
+
+    <Button
+        android:id="@+id/tv_original"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:text=" Zoom Original "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_after" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

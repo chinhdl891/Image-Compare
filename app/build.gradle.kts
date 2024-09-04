@@ -50,5 +50,5 @@ dependencies {
 //    implementation("com.github.chinhdl891:Image-Compare:102")
 
     implementation(project(":mylibrary"))
-//    implementation("com.github.chinhdl891:ImageSildeCompare:v1.0.2")
+//    implementation("com.github.chinhdl891:ImageSildeCompare:1.0.4")
 }

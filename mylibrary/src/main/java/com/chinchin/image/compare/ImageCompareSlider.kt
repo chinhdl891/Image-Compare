@@ -3,9 +3,9 @@ package com.chinchin.image.compare
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -25,13 +25,20 @@ class ImageCompareSlider @JvmOverloads constructor(
     private var heightView = 0
     private var widthView = 0
 
+    private var matrix: Matrix? = null
+    private var currentScale = 1.0f // Biến để lưu scale hiện tại
+
     init {
         init(attrs)
     }
 
     private lateinit var binding: ImageCompareSliderBinding
     private fun init(attrs: AttributeSet?) {
-        binding = ImageCompareSliderBinding.bind(View.inflate(context, R.layout.image_compare_slider, this))
+        binding = ImageCompareSliderBinding.bind(
+            View.inflate(
+                context, R.layout.image_compare_slider, this
+            )
+        )
 
         val styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.ImageCompareSlider)
         try {
@@ -47,12 +54,15 @@ class ImageCompareSlider @JvmOverloads constructor(
                 val drawable = AppCompatResources.getDrawable(context, drawableForeground)
                 binding.foregroundImage.setImageDrawable(drawable)
             }
-            val drawableSliderIcon = styledAttrs.getResourceId(R.styleable.ImageCompareSlider_slider_icon, 0)
+            val drawableSliderIcon =
+                styledAttrs.getResourceId(R.styleable.ImageCompareSlider_slider_icon, 0)
             if (drawableSliderIcon != 0) {
                 val drawable = AppCompatResources.getDrawable(context, drawableSliderIcon)
                 binding.sliderImage.setImageDrawable(drawable)
             }
-            val percentPosition = styledAttrs.getFloat(R.styleable.ImageCompareSlider_slider_image_position_percent, 0.5f)
+            val percentPosition = styledAttrs.getFloat(
+                R.styleable.ImageCompareSlider_slider_image_position_percent, 0.5f
+            )
             binding.guideline.setGuidelinePercent(percentPosition)
         } finally {
             styledAttrs.recycle()
@@ -94,14 +104,29 @@ class ImageCompareSlider @JvmOverloads constructor(
         binding.backgroundImage.setImageBitmap(resizedBackgroundBitmap)
 
         val foregroundBitmap = createTransparentBitmap(
-            backgroundData.width,
-            backgroundData.height
+            backgroundData.width, backgroundData.height
         )
+
+
         val resizedForegroundBitmap = resizeBitmapToFitScreenWidth(foregroundBitmap)
         binding.foregroundImage.setImageBitmap(resizedForegroundBitmap)
 
     }
 
+
+    fun zoomForeImage(scaleFactor: Float = 1.25f) {
+        binding.foregroundImage.scaleX = scaleFactor
+        binding.foregroundImage.scaleY = scaleFactor
+        currentScale = scaleFactor
+        invalidate()
+    }
+
+    fun originalForeImage() {
+        binding.foregroundImage.scaleX = 1f
+        binding.foregroundImage.scaleY = 1f
+        currentScale = 1f
+        invalidate()
+    }
 
 
     fun resizeBitmapToFitScreenWidth(bitmap: Bitmap): Bitmap {
@@ -119,18 +144,18 @@ class ImageCompareSlider @JvmOverloads constructor(
     }
 
 
-    fun setForegroundImage( foregroundData: Any) {
+    fun setForegroundImage(foregroundData: Any) {
 //        loadIntoImageView(foregroundData, binding.foregroundImage)
-        Glide.with(context).asBitmap().load(foregroundData).into(object : CustomTarget<Bitmap>(){
+        Glide.with(context).asBitmap().load(foregroundData).into(object : CustomTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-              binding.foregroundImage.setImageBitmap(resizeBitmapToFitScreenWidth(resource))
+                binding.foregroundImage.setImageBitmap(resizeBitmapToFitScreenWidth(resource))
             }
 
             override fun onLoadCleared(placeholder: Drawable?) {
 
             }
 
-        } )
+        })
     }
 
 
@@ -167,8 +192,7 @@ class ImageCompareSlider @JvmOverloads constructor(
     }
 
     private fun setImageWidth(progress: Int) {
-        if (progress <= 0)
-            return
+        if (progress <= 0) return
         if (binding.foregroundImage.visibility == View.INVISIBLE || binding.backgroundImage.visibility == View.INVISIBLE) {
             binding.backgroundImage.visibility = View.VISIBLE
             binding.foregroundImage.visibility = View.VISIBLE
