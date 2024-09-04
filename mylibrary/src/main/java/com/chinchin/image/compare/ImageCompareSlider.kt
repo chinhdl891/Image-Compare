@@ -23,10 +23,7 @@ class ImageCompareSlider @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
     private var heightView = 0
-    private var widthView = 0
-
-    private var matrix: Matrix? = null
-    private var currentScale = 1.0f // Biến để lưu scale hiện tại
+    private var currentScale = 1.0f
 
     init {
         init(attrs)
@@ -147,7 +144,6 @@ class ImageCompareSlider @JvmOverloads constructor(
 
 
     fun setForegroundImage(foregroundData: Any) {
-//        loadIntoImageView(foregroundData, binding.foregroundImage)
         Glide.with(context).asBitmap().load(foregroundData).into(object : CustomTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 binding.foregroundImage.setImageBitmap(resizeBitmapToFitScreenWidth(resource))
@@ -158,17 +154,6 @@ class ImageCompareSlider @JvmOverloads constructor(
             }
 
         })
-    }
-
-
-    private fun loadIntoImageView(data: Any, imageView: ImageView) {
-//        when (data) {
-//            is Bitmap -> Glide.with(context).load(data).into(imageView)
-//            is Drawable -> Glide.with(context).load(data).into(imageView)
-//            is String -> Glide.with(context).load(data).into(imageView)
-//            is Int -> Glide.with(context).load(data).into(imageView)
-//            else -> Log.e("ImageCompareSlider", "Unsupported data type")
-//        }
     }
 
 
